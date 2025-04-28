@@ -5,10 +5,15 @@ import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
 import { WalletModalProvider, WalletDisconnectButton, WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 import { clusterApiUrl } from '@solana/web3.js';
-import Airdrop from './components/Airdrop';
 
-import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom';
+import Airdrop from './components/Airdrop';
+import Balance from './components/Balance';
+import SignMessage from './components/SignMessage';
+import SendSol from './components/SendSol';
+
+
 import { SolflareWalletAdapter } from '@solana/wallet-adapter-solflare';
+
 
 if (window.global === undefined) {
   window.global = window;
@@ -20,7 +25,6 @@ function App() {
   const endpoint = "https://solana-devnet.g.alchemy.com/v2/A0E5vaXKmfREcOsNLwW8Bw-OupajajHt"
 
   const wallets = useMemo(() => [
-    new PhantomWalletAdapter(),
     new SolflareWalletAdapter(),
   ], []);
 
@@ -33,8 +37,12 @@ function App() {
 
               <WalletMultiButton /><br />
               <WalletDisconnectButton /><br />
-
+              <Balance />
+              <SignMessage />
+              <SendSol />
               <Airdrop />
+
+
             </div>
           </WalletModalProvider>
         </WalletProvider>
